@@ -35,33 +35,34 @@ const server = express();
 server.use(express.json());
 
 const cors = require("cors");
-const data = require('./datas/data');
+const data = require('./datas/animelist');
 
 server.get('/', (req, res) => {
   res.send("Hello World!");
 });
 
-server.get('/colors', (req, res) => {
+server.get('/anime', (req, res) => {
   res.status(200).json(data);
 });
 
-server.get('/colors/:colorName', (req, res) => {
-  const { colorName } = req.params;
+server.get('/anime/:animeID', (req, res) => {
+  const { animeID } = req.params;
   //req.query = direk ? sonraki sorguları veriyor
   //req.params ise /1 gibi parametreleri veriyor
   //req.body ise gönderilen json dosyası post yöntemi olarak kullanabiliyoruz get ve post u ayırabiliyoruz parametreleri body ile gönderebiliriz yani
-  const color = data.find(color => color.color === colorName )
-  if(color)
-    res.status(200).json(color);
+  const anime = data.find(anime => anime.anime_id === animeID )
+  if(anime)
+    res.status(200).json(anime);
   else 
     res.status(404).send("404 NOT FOUND")
 });
 
-server.post('/colors', (req, res) => {
-  var newColor = req.body;
-  console.log(newColor);
-  data.push(newColor);
-  res.status(201).send(newColor);
+server.post('/anime', (req, res) => {
+  var anime = req.body;
+  //anime classını oluşturup classı doldurup öyle data.push atacak
+  console.log(anime);
+  data.push(anime);
+  res.status(201).send(anime);
 });
 
 // server.get
