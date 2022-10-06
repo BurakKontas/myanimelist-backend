@@ -4,10 +4,11 @@ require('dotenv').config();
 const express = require("express");
 
 const uri = process.env.MONGO_CONNECTION_STRING;
+const PORT = process.env.PORT;
 
-// const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion } = require('mongodb');
 
-// const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
 async function run() {
   try {
@@ -76,6 +77,6 @@ server.post('/colors', (req, res) => {
 // server.propfind
 // server.purge
 
-server.listen(5000, () => {
-  console.log('http://localhost:5000 listening');
+server.listen(PORT, () => {
+  console.log(`Our app is running on port ${ PORT }`);
 });
