@@ -1,12 +1,13 @@
 // Connecting to database
 
 require('dotenv').config();
+const express = require("express");
 
 const uri = process.env.MONGO_CONNECTION_STRING;
 
-const { MongoClient, ServerApiVersion } = require('mongodb');
+// const { MongoClient, ServerApiVersion } = require('mongodb');
 
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+// const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
 async function run() {
   try {
@@ -28,7 +29,6 @@ async function run() {
 }
 // run().catch(console.dir);
 
-const express = require("express");
 
 const server = express();
 server.use(express.json());
