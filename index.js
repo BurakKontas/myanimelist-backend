@@ -5,9 +5,9 @@ const express = require("express");
 
 const uri = process.env.MONGO_CONNECTION_STRING;
 
-// const { MongoClient, routeApiVersion } = require('mongodb');
+// const { MongoClient, ServerApiVersion } = require('mongodb');
 
-// const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, routeApi: routeApiVersion.v1 });
+// const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
 async function run() {
   try {
@@ -30,21 +30,21 @@ async function run() {
 // run().catch(console.dir);
 
 
-const route = express.Router();
-route.use(express.json());
+const server = express();
+server.use(express.json());
 
 const cors = require("cors");
 const data = require('./datas/data');
 
-route.get('/', (req, res) => {
+server.get('/', (req, res) => {
   res.send("Hello World!");
 });
 
-route.get('/colors', (req, res) => {
+server.get('/colors', (req, res) => {
   res.status(200).json(data);
 });
 
-route.get('/colors/:colorName', (req, res) => {
+server.get('/colors/:colorName', (req, res) => {
   const { colorName } = req.params;
   //req.query = direk ? sonraki sorguları veriyor
   //req.params ise /1 gibi parametreleri veriyor
@@ -56,26 +56,26 @@ route.get('/colors/:colorName', (req, res) => {
     res.status(404).send("404 NOT FOUND")
 });
 
-route.post('/colors', (req, res) => {
+server.post('/colors', (req, res) => {
   var newColor = req.body;
   console.log(newColor);
   data.push(newColor);
   res.status(201).send(newColor);
 });
 
-// route.get
-// route.post
-// route.put
-// route.delete
-// route.options
-// route.head
-// route.copy
-// route.patch
-// route.lock
-// route.unlock
-// route.propfind
-// route.purge
+// server.get
+// server.post
+// server.put
+// server.delete
+// server.options
+// server.head
+// server.copy
+// server.patch
+// server.lock
+// server.unlock
+// server.propfind
+// server.purge
 
-route.listen(5000, () => {
+server.listen(5000, () => {
   console.log('http://localhost:5000 listening');
 });
