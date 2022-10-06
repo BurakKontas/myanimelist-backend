@@ -50,7 +50,7 @@ server.get('/anime/:animeID', (req, res) => {
   //req.query = direk ? sonraki sorguları veriyor
   //req.params ise /1 gibi parametreleri veriyor
   //req.body ise gönderilen json dosyası post yöntemi olarak kullanabiliyoruz get ve post u ayırabiliyoruz parametreleri body ile gönderebiliriz yani
-  const anime = data.find(anime => anime.anime_id === animeID )
+  const anime = data.find(anime => anime.anime_id == animeID )
   if(anime)
     res.status(200).json(anime);
   else 
