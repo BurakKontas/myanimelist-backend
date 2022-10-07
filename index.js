@@ -26,8 +26,8 @@ server.get('/', (req, res) => {
   res.send("Hello World!");
 });
 
-server.get('/animes', (req, res) => {
-  connectionAnime.find().then((result) => {
+server.get('/animes', async (req, res) => {
+  await connectionAnime.find().then((result) => {
     res.status(200).json(result)
   })
 });
