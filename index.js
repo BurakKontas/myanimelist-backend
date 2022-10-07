@@ -26,8 +26,12 @@ server.get('/', (req, res) => {
   res.send("Hello World!");
 });
 
-server.get('/anime', (req, res) => {
-  res.status(200).json(data);
+server.get('/animes', (req, res) => {
+  res.status(200).json(dataAnimes);
+});
+
+server.get('/users', (req, res) => {
+  res.status(200).json(dataUsers);
 });
 
 server.get('/anime/:animeID', (req, res) => {
