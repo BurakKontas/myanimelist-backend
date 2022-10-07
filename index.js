@@ -39,7 +39,7 @@ server.get('/anime/:animeID', (req, res) => {
   //req.query = direk ? sonraki sorguları veriyor
   //req.params ise /1 gibi parametreleri veriyor
   //req.body ise gönderilen json dosyası post yöntemi olarak kullanabiliyoruz get ve post u ayırabiliyoruz parametreleri body ile gönderebiliriz yani
-  const anime = data.find(anime => anime.anime_id == animeID )
+  const anime = dataAnimes.find(anime => anime.anime_id == animeID )
   if(anime)
     res.status(200).json(anime);
   else 
@@ -47,10 +47,10 @@ server.get('/anime/:animeID', (req, res) => {
 });
 
 server.post('/anime', (req, res) => {
-  var anime = req.body;
+  var anime = new Anime(req.body)
   //anime classını oluşturup classı doldurup öyle data.push atacak
   console.log(anime);
-  data.push(anime);
+  dataAnimes.push(anime);
   res.status(201).send(anime);
 });
 
