@@ -1,17 +1,16 @@
-class User {
-    guid;
-    username;
-    password;
-    email;
-    isConfirmed;
-    avatar;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-    constructor(guid,username,password,email,isConfirmed,avatar) {
-        this.guid = guid;
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.isConfirmed = isConfirmed;
-        this.avatar = ((avatar) ?  new URL(avatar) : null);
-    }
-}
+const userSchema = new Schema({
+    _id: { type: String, required: true },
+    username: { type: String, required: true },
+    password: { type: String, required: true },
+    email: { type: String, required: true },
+    isConfirmed: { type: String, required: true },
+    avatar: { type: String, required: true },
+}, {
+  timestamps: true,
+});
+
+const User = mongoose.model('User', userSchema);
+module.exports = User;

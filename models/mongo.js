@@ -49,8 +49,14 @@ class MongoDB {
         return await this.#connect().find(query).toArray().catch((err) => this.#error(err));
     }
 
+    async dropCollection(collection) {
+        await this.#client.db(this.#database).dropCollection(collection);
+    }
+
     async close() {
         this.#client.close()
     }
 
 }
+
+module.exports = exports = MongoDB;

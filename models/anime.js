@@ -1,101 +1,41 @@
-class Anime {
-    anime_id;
-    title;
-    title_english;
-    title_japanese;
-    title_synonyms;
-    image_url;
-    type;
-    source;
-    episodes;
-    status;
-    airing;
-    aired_string;
-    aired;
-    duration;
-    rating;
-    score;
-    scored_by;
-    rank;
-    popularity;
-    members;
-    favorites;
-    background;
-    premiered;
-    broadcast;
-    related;
-    producer;
-    licensor;
-    studio;
-    genre;
-    opening_theme;
-    ending_theme;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-    constructor(anime_id,title,title_english,title_japanese,title_synonyms,image_url,type,source,episodes,status,airing,aired_string,aired,duration,rating,score,scored_by,rank,popularity,members,favorites,background,premiered,broadcast,related,producer,licensor,studio,genre,opening_theme,ending_theme) {
-        this.anime_id = anime_id;
-        this.title = title || null;
-        this.title_english = title_english || null;
-        this.title_japanese = title_japanese || null;
-        this.title_synonyms = title_synonyms || null;
-        this.image_url = image_url || null;
-        this.type = type || null;
-        this.source = source || null;
-        this.episodes = episodes || null;
-        this.status = status || null;
-        this.airing = airing || null;
-        this.aired_string = aired_string || null;
-        this.aired = aired || null;
-        this.duration = duration || null;
-        this.rating = rating || null;
-        this.score = score || null;
-        this.scored_by = scored_by || null;
-        this.rank = rank || null;
-        this.popularity = popularity || null;
-        this.members = members || null;
-        this.favorites = favorites || null;
-        this.background = background || null;
-        this.premiered = premiered || null;
-        this.broadcast = broadcast || null;
-        this.related = related || null;
-        this.producer = producer || null;
-        this.licensor = licensor || null;
-        this.studio = studio || null;
-        this.genre = genre || null;
-        this.opening_theme = opening_theme || null;
-        this.ending_theme = ending_theme || null;
-    }
+const animeSchema = new Schema({
+    _id: { type: String, required: true },
+    title: { type: String, required: true },
+    title_english: { type: String },
+    title_japanese: { type: String },
+    title_synonyms: { type: String },
+    image_url: { type: String, required: true },
+    type: { type: String, required: true },
+    source: { type: String, required: true },
+    episodes: { type: String, required: true },
+    status: { type: String, required: true },
+    airing: { type: Boolean, required: true },
+    aired_string: { type: String, required: true },
+    aired: { type: Object, required: true },
+    duration: { type: String, required: true },
+    rating:{ type: String, required: true },
+    score: { type: Number },
+    scored_by: { type: Number },
+    rank: { type: Number, required: true },
+    popularity: { type: Number },
+    members: { type: Number },
+    favorites: { type: Number },
+    background: { type: String },
+    premiered: { type: String, required: true },
+    broadcast: { type: String },
+    related: { type: String },
+    producer: { type: String, required: true },
+    licensor: { type: String },
+    studio: { type: String, required: true },
+    genre: { type: String, required: true },
+    opening_theme: { type: String },
+    ending_theme: { type: String },
+}, {
+  timestamps: true,
+});
 
-    constructor(anime) {
-        this.anime_id = anime.anime_id;
-        this.title = anime.title || null;
-        this.title_english = anime.title_english || null;
-        this.title_japanese = anime.title_japanese || null;
-        this.title_synonyms = anime.title_synonyms || null;
-        this.image_url = anime.image_url || null;
-        this.type = anime.type || null;
-        this.source = anime.source || null;
-        this.episodes = anime.episodes || null;
-        this.status = anime.status || null;
-        this.airing = anime.airing || null;
-        this.aired_string = anime.aired_string || null;
-        this.aired = anime.aired || null;
-        this.duration = anime.duration || null;
-        this.rating = anime.rating || null;
-        this.score = anime.score || null;
-        this.scored_by = anime.scored_by || null;
-        this.rank = anime.rank || null;
-        this.popularity = anime.popularity || null;
-        this.members = anime.members || null;
-        this.favorites = anime.favorites || null;
-        this.background = anime.background || null;
-        this.premiered = anime.premiered || null;
-        this.broadcast = anime.broadcast || null;
-        this.related = anime.related || null;
-        this.producer = anime.producer || null;
-        this.licensor = anime.licensor || null;
-        this.studio = anime.studio || null;
-        this.genre = anime.genre || null;
-        this.opening_theme = anime.opening_theme || null;
-        this.ending_theme = anime.ending_theme || null;
-    }
-}
+const Anime = mongoose.model('Anime', animeSchema);
+module.exports = Anime;
