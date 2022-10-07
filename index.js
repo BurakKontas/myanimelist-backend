@@ -2,34 +2,10 @@
 
 require('dotenv').config();
 const express = require("express");
+const schedule = require('node-schedule');
 
-const uri = process.env.MONGO_CONNECTION_STRING;
+
 const PORT = process.env.PORT;
-
-const { MongoClient, ServerApiVersion } = require('mongodb');
-
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
-
-async function run() {
-  try {
-    // const database = client.db('tos-1');
-    // database.createCollection("name",options);
-    // const movies = database.collection('tos');
-    // const movie = await movies.find().toArray(); // await movies.findOne({"_id":{"guid":"633d73712fad4e332130c8a4"}}).toArray()
-    // await movies.insertOne({_id:"test",a:3,b:4}, function(err,res) {
-    //   if (err) console.log(err);
-    //   else {
-    //     console.log("1 document inserted");
-    //     client.close();
-    //   }
-    // })
-  } finally {
-    // Ensures that the client will close when you finish/error
-    // await client.close();
-  }
-}
-// run().catch(console.dir);
-
 
 const server = express();
 server.use(express.json());
@@ -80,4 +56,11 @@ server.post('/anime', (req, res) => {
 
 server.listen(PORT, () => {
   console.log(`Our app is running on port ${ PORT }`);
+});
+
+
+//scheduled jobs
+
+const backup = schedule.scheduleJob("* * 00 * * *", function () {
+    console.log("backup'd");
 });
