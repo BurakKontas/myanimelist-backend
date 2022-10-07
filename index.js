@@ -27,32 +27,33 @@ server.get('/', (req, res) => {
 });
 
 server.get('/animes', (req, res) => {
-  res.status(200).json(dataAnimes);
+  connectionAnime.find().then((result) => {
+    res.status(200).json(result)
+  })
 });
 
-server.get('/users', (req, res) => {
-  res.status(200).json(dataUsers);
-});
+// server.get('/users', (req, res) => {
+//   res.status(200).json(dataUsers);
+// });
 
-server.get('/anime/:animeID', (req, res) => {
+server.get('/anime/:animeID', async (req, res) => {
   const { animeID } = req.params;
   //req.query = direk ? sonraki sorguları veriyor
   //req.params ise /1 gibi parametreleri veriyor
   //req.body ise gönderilen json dosyası post yöntemi olarak kullanabiliyoruz get ve post u ayırabiliyoruz parametreleri body ile gönderebiliriz yani
-  const anime = dataAnimes.find(anime => anime.anime_id == animeID )
-  if(anime)
+  var anime = await connectionAnime.find({'_id': animeID});
+  if(anime.length > 0)
     res.status(200).json(anime);
   else 
     res.status(404).send("404 NOT FOUND")
 });
 
-server.post('/anime', (req, res) => {
-  var anime = new Anime(req.body)
-  //anime classını oluşturup classı doldurup öyle data.push atacak
-  console.log(anime);
-  dataAnimes.push(anime);
-  res.status(201).send(anime);
-});
+// server.post('/anime', (req, res) => {
+//   var anime = new Anime(req.body)
+//   //anime classını oluşturup classı doldurup öyle data.push atacak
+//   dataAnimes.push(anime);
+//   res.status(201).send(anime);
+// });
 
 // server.patch("/anime", (req,res) => {
 //   connectionAnime.dropCollection("animeList");
