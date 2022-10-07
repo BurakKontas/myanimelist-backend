@@ -27,7 +27,7 @@ server.get('/', (req, res) => {
 });
 
 server.get('/animes', async (req, res) => {
-  await connectionAnime.find().then((result) => {
+  return await connectionAnime.find().then((result) => {
     res.status(200).json(result)
   })
 });
@@ -41,7 +41,7 @@ server.get('/anime/:animeID', async (req, res) => {
   //req.query = direk ? sonraki sorguları veriyor
   //req.params ise /1 gibi parametreleri veriyor
   //req.body ise gönderilen json dosyası post yöntemi olarak kullanabiliyoruz get ve post u ayırabiliyoruz parametreleri body ile gönderebiliriz yani
-  await connectionAnime.find({'_id': animeID}).then(result => {
+  return await connectionAnime.find({'_id': animeID}).then(result => {
     if(result.length > 0)
     res.status(200).json(result);
   else 
