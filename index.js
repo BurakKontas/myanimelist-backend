@@ -41,11 +41,13 @@ server.get('/anime/:animeID', async (req, res) => {
   //req.query = direk ? sonraki sorguları veriyor
   //req.params ise /1 gibi parametreleri veriyor
   //req.body ise gönderilen json dosyası post yöntemi olarak kullanabiliyoruz get ve post u ayırabiliyoruz parametreleri body ile gönderebiliriz yani
-  var anime = await connectionAnime.find({'_id': animeID});
-  if(anime.length > 0)
-    res.status(200).json(anime);
+  await connectionAnime.find({'_id': animeID}).then(result => {
+    if(result.length > 0)
+    res.status(200).json(result);
   else 
     res.status(404).send("404 NOT FOUND")
+  });
+
 });
 
 // server.post('/anime', (req, res) => {
